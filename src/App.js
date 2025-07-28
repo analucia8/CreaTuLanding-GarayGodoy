@@ -1,4 +1,4 @@
-// src/App.jsx
+
 import './App.css';
 import NavBar from './components/NavBar';
 import Contenedor from './components/Contenedor';
@@ -14,4 +14,3 @@ function App() {
 
 export default App;
 
-/*hola*/ 

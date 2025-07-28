@@ -1,4 +1,4 @@
-import { FaShoppingCart } from 'react-icons/fa';   // instala react-icons si no lo tienes
+import { FaShoppingCart } from 'react-icons/fa';   
 
 const CartWidget = () => (
   <div style={{  marginLeft: 'auto'}}>
