@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <NavBar />
-      <Contenedor saludo="¡Hola Ana! Este es nuestro catálogo" />
+      <Contenedor saludo="¡Hola! Aquí estará el catálogo" />
     </>
   );
 }
