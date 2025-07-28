@@ -1,0 +1,40 @@
+/* NavBar.css */
+
+/* Reset del ul de navegación */
+.nav-links {
+    list-style: none;   /* 🔸 quita los puntitos */
+    margin: 0;          /* quita sangrías del ul */
+    padding: 0;
+    display: flex;      /* 🔸 coloca los <li> en fila */
+    gap: auto;          /* separación horizontal entre links */
+  }
+  
+  /* Si quieres afinar el espacio de cada li, opcional */
+.nav-links li {
+  }
+  
+  /* Links sin subrayado ni cambio de color */
+  .nav-links a,
+  .nav-links a:visited {
+    text-decoration: none;
+    color: inherit;
+    margin-left: 1.5rem;
+    text-align: center;
+  }
+  
+  .nav-links a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Barra general */
+  .navbar {
+    display: flex;            /* logo | ul | carrito */
+    align-items: center;      /* centra verticalmente */
+    background-color: black;
+    color: white;
+    padding: 0.75rem 1.5rem;  /* algo de aire */
+    text-align: center;
+    
+    
+  }
+  
