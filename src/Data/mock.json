@@ -2,18 +2,18 @@
     {
       "id": "1",
       "nombre": "Amigurumi Listo de 20cm",
-      "descripcion": "Amigurumi listo para regalar de 20cm a elegir entre Leon, Jirafa, elefante. Se entrega luego de 20 días.",
+      "descripcion": "Amigurumi listo para regalar de 20cm a elegir entre Ratón, Leon, Jirafa, elefante. Se entrega luego de 20 días.",
       "precio": 1290,
       "categoria": "Amigurumis",
-      "imagen": ""
+      "imagen": "/Img/raton.jpg"
     },
     {
       "id": "2",
       "nombre": "Amigurumi Listo de 30cm",
-      "descripcion": "Amigurumi listo para regalar de 30cm a elegir entre Leon, Jirafa, elefante. Se entrega luego de 20 días.",
+      "descripcion": "Amigurumi listo para regalar de 30cm a elegir entre Conejo, Leon, Jirafa, elefante. Se entrega luego de 20 días.",
       "precio": 1590,
       "categoria": "Amigurumis",
-      "imagen": ""
+      "imagen": "/Img/conejo.jpg"
     },
     {
       "id": "3",
@@ -29,7 +29,7 @@
       "descripcion": "Aguja metálica Nº4",
       "precio": 300,
       "categoria": "Materias Primas",
-      "imagen": "https://picsum.photos/seed/mochila/400/300"
+      "imagen": "/Img/aguja.jpg"
     },
     {
       "id": "5",
