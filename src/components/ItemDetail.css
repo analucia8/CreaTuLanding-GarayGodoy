@@ -1,0 +1,91 @@
+/* Contenedor tipo “card” para que el texto se lea sobre fondos oscuros */
+.detail-wrap {
+    max-width: 1000px;
+    margin: 24px auto;
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.55);
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  
+    display: grid;
+    gap: 24px;
+    grid-template-columns: 1fr;
+  }
+  
+  @media (min-width: 768px) {
+    .detail-wrap {
+      grid-template-columns: 1fr 1fr;
+      padding: 32px;
+    }
+  }
+  
+  /* Imagen con tamaño controlado */
+  .detail-image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 16px;
+    background: #f7f7f7;
+    overflow: hidden;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .detail-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+  }
+  
+  /* Texto más grande y legible */
+  .detail-info h1 {
+    margin: 0 0 8px 0;
+    font-size: clamp(1.25rem, 1.2vw + 1rem, 2rem);
+    color: #1f2937; /* gris bien oscuro */
+  }
+  
+  .detail-info p {
+    margin: 8px 0 0 0;
+    line-height: 1.6;
+    font-size: clamp(1rem, 0.3vw + 0.95rem, 1.125rem);
+    color: #374151;
+  }
+  
+  .detail-price {
+    margin: 12px 0 16px;
+    font-size: clamp(1.25rem, 0.6vw + 1rem, 1.5rem);
+    font-weight: 700;
+    color: #111827;
+  }
+  
+  .detail-category {
+    display: inline-block;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    color: #4b5563;
+    background: #e5e7eb;
+    padding: 4px 8px;
+    border-radius: 999px;
+  }
+  
+  /* Botón */
+  .btn-primary {
+    display: inline-block;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 10px;
+    background: #757575;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  .btn-primary:disabled {
+    background: #bdbdbd;
+    cursor: not-allowed;
+  }
+  
