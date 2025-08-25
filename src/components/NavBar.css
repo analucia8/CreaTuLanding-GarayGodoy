@@ -34,4 +34,8 @@
     
     
   }
-  
+  /* Tamaño para los íconos de los costados del logo */
+.navbar-icon {
+  width: 24px;
+  height: 24px;
+}

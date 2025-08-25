@@ -1,34 +1,35 @@
-// src/components/ItemDetailContainer.jsx
 import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import ItemDetail from "./ItemDetail";
-import products from "../Data/mock.json";
+import { getProductById } from "../services/products";
 
 export default function ItemDetailContainer() {
   const { id } = useParams();
+  const [item, setItem] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const raw = (Array.isArray(products) ? products : [])
-    .find((p) => String(p.id) === String(id));
+  useEffect(() => {
+    setLoading(true);
+    getProductById(id)
+      .then((prod) => setItem(prod))
+      .finally(() => setLoading(false));
+  }, [id]); // <- recomendado por la consigna
 
-  if (!raw) {
-    return <section style={{ padding: 16 }}><p>Producto no encontrado.</p></section>;
+  if (loading) {
+    return (
+      <section style={{ padding: 16 }}>
+        <p>Cargando detalles del producto…</p>
+      </section>
+    );
   }
 
-  // Normalizamos nombres de campos (mock -> ItemDetail)
-  const img = raw.image ?? raw.imagen ?? null;
-  const item = {
-    id: raw.id,
-    title: raw.title ?? raw.nombre ?? "Sin título",
-    nombre: raw.nombre ?? raw.title ?? "Sin título",
-    description: raw.description ?? raw.descripcion ?? "",
-    descripcion: raw.descripcion ?? raw.description ?? "",
-    price: raw.price ?? raw.precio ?? null,
-    precio: raw.precio ?? raw.price ?? null,
-    image: img,
-    imagen: img,
-    imageUrl: img,
-    category: raw.category ?? raw.categoria ?? null,
-    categoria: raw.categoria ?? raw.category ?? null,
-  };
+  if (!item) {
+    return (
+      <section style={{ padding: 16 }}>
+        <p>Producto no encontrado.</p>
+      </section>
+    );
+  }
 
   return (
     <section style={{ padding: 16 }}>

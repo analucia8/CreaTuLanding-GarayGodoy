@@ -20,9 +20,10 @@ function NavBar() {
 
   return (
     <nav className="navbar">
-      <img src={icono} alt="Logo" width={24} height={24} />
+      {/* antes: <img src={icono} alt="Logo" width={24} height={24} /> */}
+      <img className="navbar-icon" src={icono} alt="Logo" />
       <h2 className="logo">AMIGULOVE</h2>
-      <img src={icono} alt="Logo" width={24} height={24} />
+      <img className="navbar-icon" src={icono} alt="Logo" />
 
       <ul className="nav-links">
         {categories.map((cat) => (

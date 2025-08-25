@@ -1,17 +1,30 @@
-// src/components/ItemListContainer.jsx
-import products from "../Data/mock.json";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import { getProducts } from "../services/products";
 
-export default function ItemListContainer({
-  saludo = "Catálogo",
-  filterSlug = "todos",
-}) {
-  const data = Array.isArray(products) ? products : [];
+export default function ItemListContainer({ saludo = "Catálogo" }) {
+  const { slug } = useParams();              
+  const [lista, setLista] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const lista =
-    filterSlug === "todos"
-      ? data
-      : data.filter((p) => (p.categoria ?? p.category) === filterSlug);
+  useEffect(() => {
+    setLoading(true);
+    getProducts()
+      .then((all) => {
+        const filtered = slug ? all.filter((p) => p.categoria === slug) : all;
+        setLista(filtered);
+      })
+      .finally(() => setLoading(false));
+  }, [slug]); 
+
+  if (loading) {
+    return (
+      <section style={{ padding: 24, background: "transparent" }}>
+        <h2 style={{ color: "#fff", textAlign: "center" }}>{saludo}</h2>
+        <p style={{ color: "#fff", textAlign: "center" }}>Cargando productos…</p>
+      </section>
+    );
+  }
 
   if (lista.length === 0) {
     return (
