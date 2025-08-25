@@ -37,7 +37,7 @@ export default function ItemListContainer({ saludo = "Catálogo" }) {
 
   return (
     <section style={{ padding: 24, background: "transparent" }}>
-      <h2 style={{ color: "#fff", margin: "0 0 16px 0", textAlign: "center" }}>
+      <h2 style={{ fontSize: "2rem", color: "#fff", margin: "0 0 16px 0", textAlign: "center" }}>
         {saludo}
       </h2>
 

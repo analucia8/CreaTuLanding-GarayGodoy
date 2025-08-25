@@ -13,7 +13,7 @@ export default function ItemDetailContainer() {
     getProductById(id)
       .then((prod) => setItem(prod))
       .finally(() => setLoading(false));
-  }, [id]); // <- recomendado por la consigna
+  }, [id]); 
 
   if (loading) {
     return (

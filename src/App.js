@@ -1,8 +1,20 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 import "./App.css";
 import NavBar from "./components/NavBar";
 import ItemListContainer from "./components/ItemListContainer";
 import ItemDetailContainer from "./components/ItemDetailContainer";
+
+function CategoryRoute() {
+  const { slug } = useParams();
+  const labels = {
+    "amigurumis": "Amigurumis",
+    "materias-primas": "Materias primas",
+    "patrones": "Patrones",
+  };
+  const saludo = labels[slug] ?? slug.replace(/-/g, " ");
+
+  return <ItemListContainer saludo={saludo} filterSlug={slug} />;
+}
 
 export default function App() {
   return (
@@ -10,17 +22,27 @@ export default function App() {
       <NavBar />
       <main style={{ padding: "1rem" }}>
         <Routes>
-          {/* Catálogo completo */}
-          <Route path="/" element={<ItemListContainer saludo="¡Catálogo completo!" />} />
+          {/* Catálogo completo*/}
+          <Route
+            path="/"
+            element={
+              <ItemListContainer
+                saludo="Este es nuestro catálogo completo"
+                filterSlug="todos"
+              />
+            }
+          />
 
-          {/* Categorías dinámicas (amigurumis, materias-primas, patrones, etc.) */}
-          <Route path="/categoria/:slug" element={<ItemListContainer saludo="Catálogo" />} />
+          {/* Categorías dinámicas */}
+          <Route path="/categoria/:slug" element={<CategoryRoute />} />
 
-          {/* Detalle */}
           <Route path="/item/:id" element={<ItemDetailContainer />} />
 
-          {/* 404 (recomendado) */}
-          <Route path="*" element={<h2 style={{ padding: 16 }}>404 - Página no encontrada</h2>} />
+          {/* 404 */}
+          <Route
+            path="*"
+            element={<h2 style={{ padding: 16 }}>404 - Página no encontrada</h2>}
+          />
         </Routes>
       </main>
     </BrowserRouter>

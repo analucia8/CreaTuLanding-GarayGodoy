@@ -20,7 +20,6 @@ function NavBar() {
 
   return (
     <nav className="navbar">
-      {/* antes: <img src={icono} alt="Logo" width={24} height={24} /> */}
       <img className="navbar-icon" src={icono} alt="Logo" />
       <h2 className="logo">AMIGULOVE</h2>
       <img className="navbar-icon" src={icono} alt="Logo" />
