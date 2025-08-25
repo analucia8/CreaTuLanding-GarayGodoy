@@ -2,39 +2,31 @@
 import products from "../Data/mock.json";
 import { Link } from "react-router-dom";
 
-// Normaliza "Materias Primas" -> "materias-primas" (y quita acentos)
-const normalize = (s) =>
-  String(s || "")
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .trim()
-    .toLowerCase()
-    .replace(/\s+/g, "-");
-
 export default function ItemListContainer({
   saludo = "Catálogo",
   filterSlug = "todos",
 }) {
   const data = Array.isArray(products) ? products : [];
 
-  const filtro = normalize(filterSlug);
   const lista =
-    filtro === "todos"
+    filterSlug === "todos"
       ? data
-      : data.filter((p) => normalize(p.categoria) === filtro);
+      : data.filter((p) => (p.categoria ?? p.category) === filterSlug);
 
   if (lista.length === 0) {
     return (
-      <section style={{ padding: 24, background: "transparent"}}>
-        <h2 >{saludo}</h2>
-        <p>No hay productos.</p>
+      <section style={{ padding: 24, background: "transparent" }}>
+        <h2 style={{ color: "#fff", textAlign: "center" }}>{saludo}</h2>
+        <p style={{ color: "#fff", textAlign: "center" }}>No hay productos.</p>
       </section>
     );
   }
 
   return (
     <section style={{ padding: 24, background: "transparent" }}>
-      <h2 style={{ color: "#fff", margin: "0 0 16px 0", textAlign:"center" }}>{saludo}</h2>
+      <h2 style={{ color: "#fff", margin: "0 0 16px 0", textAlign: "center" }}>
+        {saludo}
+      </h2>
 
       <div
         style={{
@@ -45,19 +37,21 @@ export default function ItemListContainer({
       >
         {lista.map((p) => (
           <article
-          key={String(p.id)}
-          style={{
-            background: "rgba(255,255,255,0.45)",
-            borderRadius: 12,
-            padding: 12,
-            boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: 12,
-          }}
-        >
-        
+            key={String(p.id)}
+            style={{
+              background: "rgba(255,255,255,0.45)",
+              backdropFilter: "blur(8px)",
+              WebkitBackdropFilter: "blur(8px)",
+              border: "1px solid rgba(255,255,255,0.35)",
+              borderRadius: 12,
+              padding: 12,
+              boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: 12,
+            }}
+          >
             <div
               style={{
                 width: "100%",
@@ -71,15 +65,13 @@ export default function ItemListContainer({
             >
               {p.imagen && (
                 <img
-                  src={p.imagen} // ej: "/img/jirafa.jpg" (en public/img)
+                  src={p.imagen}
                   alt={p.nombre}
                   style={{
                     width: "100%",
                     height: "100%",
-                    objectFit: "cover",     // o "cover"
+                    objectFit: "cover",
                     display: "block",
-                    borderRadius: 12,
-                    clipPath: "inset(0 round 12px)",  // recorte forzado
                   }}
                 />
               )}
@@ -89,7 +81,6 @@ export default function ItemListContainer({
               <strong>{p.nombre}</strong>
             </div>
 
-            {/* Botón "Ver más detalles" */}
             <div style={{ marginTop: "auto", width: "100%" }}>
               <Link
                 to={`/item/${p.id}`}

@@ -1,4 +1,4 @@
-/* Contenedor tipo “card” para que el texto se lea sobre fondos oscuros */
+/* Contenedor tipo card*/
 .detail-wrap {
     max-width: 1000px;
     margin: 24px auto;
@@ -19,7 +19,7 @@
     }
   }
   
-  /* Imagen con tamaño controlado */
+  /* Estilo imagen*/
   .detail-image {
     width: 100%;
     aspect-ratio: 4 / 3;
@@ -39,11 +39,11 @@
     border-radius: inherit;
   }
   
-  /* Texto más grande y legible */
+  /* Estilo textos */
   .detail-info h1 {
     margin: 0 0 8px 0;
     font-size: clamp(1.25rem, 1.2vw + 1rem, 2rem);
-    color: #1f2937; /* gris bien oscuro */
+    color: #1f2937; 
   }
   
   .detail-info p {
@@ -70,7 +70,7 @@
     border-radius: 999px;
   }
   
-  /* Botón */
+  /* Estilo botón */
   .btn-primary {
     display: inline-block;
     padding: 10px 14px;

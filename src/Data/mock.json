@@ -4,7 +4,7 @@
       "nombre": "Amigurumi Listo de 20cm",
       "descripcion": "Amigurumi listo para regalar de 20cm a elegir entre Ratón, Leon, Jirafa, elefante. Se entrega luego de 20 días.",
       "precio": 1290,
-      "categoria": "Amigurumis",
+      "categoria": "amigurumis",
       "imagen": "/Img/raton.jpg"
     },
     {
@@ -12,7 +12,7 @@
       "nombre": "Amigurumi Listo de 30cm",
       "descripcion": "Amigurumi listo para regalar de 30cm a elegir entre Conejo, Leon, Jirafa, elefante. Se entrega luego de 20 días.",
       "precio": 1590,
-      "categoria": "Amigurumis",
+      "categoria": "amigurumis",
       "imagen": "/Img/conejo.jpg"
     },
     {
@@ -20,7 +20,7 @@
       "nombre": "Madeja de hilo de algodón",
       "descripcion": "Madeja de hilo de 100gr",
       "precio": 250,
-      "categoria": "Materias Primas",
+      "categoria": "materias-primas",
       "imagen": "/Img/Ovillo.jpg"
     },
     {
@@ -28,7 +28,7 @@
       "nombre": "Aguja de Crochet Nº4",
       "descripcion": "Aguja metálica Nº4",
       "precio": 300,
-      "categoria": "Materias Primas",
+      "categoria": "materias-primas",
       "imagen": "/Img/aguja.jpg"
     },
     {
@@ -36,7 +36,7 @@
       "nombre": "Patrón de Jirafa",
       "descripcion": "Patrón con explicaciones paso a paso para que crees tu propio amigurumi Jirafa",
       "precio": 300,
-      "categoria": "Patrones",
+      "categoria": "patrones",
       "imagen": "/Img/Jirafa.jpg"
     }
   ]

@@ -25,7 +25,7 @@ export default function ItemDetailContainer() {
     precio: raw.precio ?? raw.price ?? null,
     image: img,
     imagen: img,
-    imageUrl: img, // por si tu ItemDetail espera imageUrl
+    imageUrl: img,
     category: raw.category ?? raw.categoria ?? null,
     categoria: raw.categoria ?? raw.category ?? null,
   };
