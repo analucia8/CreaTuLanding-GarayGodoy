@@ -1,13 +1,35 @@
+// src/components/ItemDetail.jsx
+import { useState } from "react";
 import "./ItemDetail.css";
+import ItemCount from "./ItemCount";
+import { useCart } from "../context/CartContext";
 
 export default function ItemDetail({ item }) {
-  console.log("[DBG] ItemDetail item:", item); // Depuración
+  const [addedQty, setAddedQty] = useState(0);
+  const { addItem } = useCart(); // << usar contexto
+
+  if (!item) return <p className="detail-loading">Cargando…</p>;
 
   const title = item.nombre;
   const desc = item.descripcion ?? "";
-  const img = item.imagenUrl ?? ""; // Cambia imagen a imagenUrl
+  const img = item.imagenUrl ?? "";
   const price = item.precio;
-  const category = item.slugCategoria ?? ""; // Cambia categoria a slugCategoria
+  const category = item.slugCategoria ?? "";
+  const stock = item.stock ?? 0;
+
+  const onAdd = (qty) => {
+    setAddedQty(qty);
+    // agregar al carrito
+    addItem(
+      {
+        productId: item.id,
+        nombre: item.nombre,
+        precio: item.precio,
+        imagenUrl: item.imagenUrl,
+      },
+      qty
+    );
+  };
 
   return (
     <section className="detail-wrap">
@@ -22,7 +44,18 @@ export default function ItemDetail({ item }) {
         {desc && <p>{desc}</p>}
 
         <div style={{ marginTop: 16 }}>
-          <button className="btn-primary">Agregar al carrito</button>
+          {stock <= 0 && <p className="detail-out">Producto sin stock</p>}
+
+          {stock > 0 && addedQty === 0 && (
+            <ItemCount stock={stock} initial={1} onAdd={onAdd} />
+          )}
+
+          {addedQty > 0 && (
+            <p className="detail-added">
+              ¡Agregado! Cantidad: {addedQty}.{" "}
+              <a href="/cart" className="btn-primary">Ir al carrito</a>
+            </p>
+          )}
         </div>
       </div>
     </section>

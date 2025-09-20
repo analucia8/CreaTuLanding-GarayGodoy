@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ItemDetail from "./ItemDetail";
-import { getProductById } from "../services/firestore"; // Cambia a firestore.js
+import { fetchProductById as getProductById } from "../services/firestore";
 
 export default function ItemDetailContainer() {
   const { id } = useParams();
