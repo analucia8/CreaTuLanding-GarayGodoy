@@ -1,21 +1,34 @@
+// src/components/ItemListContainer.jsx
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getProducts } from "../services/products";
+import { fetchAllProducts, fetchProductsByCategory } from "../services/firestore";
 
 export default function ItemListContainer({ saludo = "Catálogo" }) {
-  const { slug } = useParams();              
+  const { slug } = useParams();
   const [lista, setLista] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let alive = true;
     setLoading(true);
-    getProducts()
-      .then((all) => {
-        const filtered = slug ? all.filter((p) => p.categoria === slug) : all;
-        setLista(filtered);
-      })
-      .finally(() => setLoading(false));
-  }, [slug]); 
+
+    (async () => {
+      try {
+        const data = slug
+          ? await fetchProductsByCategory(slug)
+          : await fetchAllProducts();
+
+        if (alive) setLista(data);
+      } catch (e) {
+        console.error("Error cargando productos:", e);
+        if (alive) setLista([]);
+      } finally {
+        if (alive) setLoading(false);
+      }
+    })();
+
+    return () => { alive = false; };
+  }, [slug]);
 
   if (loading) {
     return (
@@ -37,7 +50,14 @@ export default function ItemListContainer({ saludo = "Catálogo" }) {
 
   return (
     <section style={{ padding: 24, background: "transparent" }}>
-      <h2 style={{ fontSize: "2rem", color: "#fff", margin: "0 0 16px 0", textAlign: "center" }}>
+      <h2
+        style={{
+          fontSize: "2rem",
+          color: "#fff",
+          margin: "0 0 16px 0",
+          textAlign: "center",
+        }}
+      >
         {saludo}
       </h2>
 
@@ -76,9 +96,9 @@ export default function ItemListContainer({ saludo = "Catálogo" }) {
                 justifyContent: "center",
               }}
             >
-              {p.imagen && (
+              {p.imagenUrl && (
                 <img
-                  src={p.imagen}
+                  src={p.imagenUrl}
                   alt={p.nombre}
                   style={{
                     width: "100%",

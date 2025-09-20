@@ -1,11 +1,13 @@
 import "./ItemDetail.css";
 
 export default function ItemDetail({ item }) {
+  console.log("[DBG] ItemDetail item:", item); // Depuración
+
   const title = item.nombre;
   const desc = item.descripcion ?? "";
-  const img = item.imagen ?? "";
+  const img = item.imagenUrl ?? ""; // Cambia imagen a imagenUrl
   const price = item.precio;
-  const category = item.categoria ?? "";
+  const category = item.slugCategoria ?? ""; // Cambia categoria a slugCategoria
 
   return (
     <section className="detail-wrap">
