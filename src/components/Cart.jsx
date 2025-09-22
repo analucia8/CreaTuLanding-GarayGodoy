@@ -11,7 +11,7 @@ export default function Cart() {
         <h2 style={{ color: "#fff", textAlign: "center" }}>Carrito</h2>
         <p style={{ color: "#fff", textAlign: "center" }}>Carrito vacío</p>
         <p style={{ textAlign: "center" }}>
-          <Link to="/" style={{ color: "#fff", textDecoration: "underline" }}>
+          <Link to="/" className="btn btn--outline">
             ← Volver al catálogo
           </Link>
         </p>
@@ -51,10 +51,16 @@ export default function Cart() {
             <div>
               <div style={{ fontWeight: 700 }}>{it.nombre}</div>
               <div style={{ fontSize: 14 }}>
-                Cantidad: {it.cantidad} · Unitario: ${it.precio} · Subtotal: ${it.cantidad * it.precio}
+                Cantidad: {it.cantidad} · Unitario: ${it.precio} · Subtotal: $
+                {it.cantidad * it.precio}
               </div>
             </div>
-            <button onClick={() => removeItem(it.productId)}>Quitar</button>
+            <button
+              className="btn btn--outline"
+              onClick={() => removeItem(it.productId)}
+            >
+              Quitar
+            </button>
           </li>
         ))}
       </ul>
@@ -68,19 +74,14 @@ export default function Cart() {
           color: "#fff",
         }}
       >
-        <strong>Total: ${totalPrice}</strong>
+        <strong style={{ fontSize: 18 }}>Total: ${totalPrice}</strong>
+
         <div style={{ display: "flex", gap: 8 }}>
-          <button onClick={clear}>Vaciar carrito</button>
-          <Link
-            to="/checkout"
-            style={{
-              padding: "8px 12px",
-              background: "#757575",
-              color: "#fff",
-              borderRadius: 8,
-              textDecoration: "none",
-            }}
-          >
+          <button className="btn btn--outline" onClick={clear}>
+            Vaciar carrito
+          </button>
+
+          <Link to="/checkout" className="btn btn--primary">
             Finalizar compra
           </Link>
         </div>

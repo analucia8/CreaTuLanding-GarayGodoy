@@ -121,8 +121,8 @@ export default function ItemListContainer({ saludo = "Catálogo" }) {
                   display: "block",
                   textAlign: "center",
                   padding: "8px 12px",
-                  background: "#757575",
-                  color: "#fff",
+                  background: "#fff",
+                  color: "black",
                   borderRadius: 8,
                   textDecoration: "none",
                 }}

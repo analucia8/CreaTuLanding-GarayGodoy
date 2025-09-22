@@ -1,4 +1,6 @@
+// src/components/Checkout.jsx
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { createOrderWithStockCheck } from "../services/firestore";
 import CheckoutForm from "./CheckoutForm";
@@ -13,14 +15,12 @@ export default function Checkout() {
     try {
       setLoading(true);
       setError(null);
-
       const orderItems = items.map((it) => ({
         productId: it.productId,
         nombre: it.nombre,
         precio: it.precio,
         cantidad: it.cantidad,
       }));
-
       const id = await createOrderWithStockCheck({ buyer, items: orderItems });
       setOrderId(id);
       clear();
@@ -36,21 +36,33 @@ export default function Checkout() {
       <section style={{ padding: 24, color: "#fff", textAlign: "center" }}>
         <h2>¡Gracias por tu compra!</h2>
         <p>ID de orden: <strong>{orderId}</strong></p>
-        <p>Te llegará un correo con los detalles.</p>
+        <Link to="/" className="btn btn--primary" style={{ marginTop: 12 }}>
+          Volver al catálogo
+        </Link>
       </section>
     );
   }
 
   if (!items.length) {
-    return <p style={{ padding: 24, color: "#fff", textAlign: "center" }}>Carrito vacío</p>;
+    return (
+      <section style={{ padding: 24, color: "#fff", textAlign: "center" }}>
+        <p>Carrito vacío</p>
+        <Link to="/cart" className="btn btn--outline">Ir al carrito</Link>
+      </section>
+    );
   }
 
   return (
     <section style={{ padding: 24, color: "#fff" }}>
       <h2 style={{ textAlign: "center", marginBottom: 16 }}>Checkout</h2>
-      {loading && <p>Generando orden...</p>}
       {error && <p style={{ color: "tomato" }}>{error}</p>}
-      <CheckoutForm onConfirm={handleConfirm} />
+
+      {/* para deshabilitar/rotular el botón */}
+      <CheckoutForm onConfirm={handleConfirm} loading={loading} />
+
+      <div style={{ marginTop: 12 }}>
+        <Link to="/cart" className="btn btn--outline">Volver al carrito</Link>
+      </div>
     </section>
   );
 }

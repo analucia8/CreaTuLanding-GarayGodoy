@@ -53,7 +53,7 @@ export default function ItemDetail({ item }) {
           {addedQty > 0 && (
             <p className="detail-added">
               ¡Agregado! Cantidad: {addedQty}.{" "}
-              <Link to="/cart" className="btn-primary">Ir al carrito</Link>
+              <Link to="/cart" className="btn btn--primary">Ir al carrito</Link>
             </p>
           )}
         </div>
