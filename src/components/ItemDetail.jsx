@@ -1,12 +1,13 @@
 // src/components/ItemDetail.jsx
 import { useState } from "react";
+import { Link } from "react-router-dom";        // 👈 NUEVO
 import "./ItemDetail.css";
 import ItemCount from "./ItemCount";
 import { useCart } from "../context/CartContext";
 
 export default function ItemDetail({ item }) {
   const [addedQty, setAddedQty] = useState(0);
-  const { addItem } = useCart(); // << usar contexto
+  const { addItem } = useCart();
 
   if (!item) return <p className="detail-loading">Cargando…</p>;
 
@@ -19,7 +20,6 @@ export default function ItemDetail({ item }) {
 
   const onAdd = (qty) => {
     setAddedQty(qty);
-    // agregar al carrito
     addItem(
       {
         productId: item.id,
@@ -53,7 +53,8 @@ export default function ItemDetail({ item }) {
           {addedQty > 0 && (
             <p className="detail-added">
               ¡Agregado! Cantidad: {addedQty}.{" "}
-              <a href="/cart" className="btn-primary">Ir al carrito</a>
+              {/* 👇 Usar Link, no <a href> */}
+              <Link to="/cart" className="btn-primary">Ir al carrito</Link>
             </p>
           )}
         </div>
