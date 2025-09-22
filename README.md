@@ -1,70 +1,72 @@
-# Getting Started with Create React App
+# Amigulove – E-commerce (React + Firebase)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Proyecto final de un **curso de React**.  
+SPA con catálogo de productos, detalle, carrito con Context y **checkout** que crea órdenes en **Firestore**.
 
-## Available Scripts
+## Tech
+- React (Create React App) · React Router  
+- Context API (carrito)  
+- Firebase **Firestore**
 
-In the project directory, you can run:
+## Correr el proyecto
+    # instalar
+    npm install
+    # variables de entorno (crear este archivo)
+    cp .env.example .env.local
+    # iniciar
+    npm start
+    # build prod
+    npm run build
 
-### `npm start`
+## Variables de entorno (`.env.local`)
+> CRA requiere el prefijo `REACT_APP_`.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+    REACT_APP_FIREBASE_API_KEY=...
+    REACT_APP_FIREBASE_AUTH_DOMAIN=tu-proyecto.firebaseapp.com
+    REACT_APP_FIREBASE_PROJECT_ID=tu-proyecto
+    REACT_APP_FIREBASE_APP_ID=1:xxxx:web:yyyy
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Rutas
+- `/` catálogo  
+- `/categoria/:slug`  
+- `/item/:id`  
+- `/cart`  
+- `/checkout`
 
-### `npm test`
+## Firestore
+**Colecciones**
+- `Items`  
+  Campos: `nombre`, `descripcion`, `precio`, `slugCategoria`, `stock`, `imagenUrl`
+- `orders`  
+  Campos: `buyer{nombre,email,telefono}`, `items[{productId,nombre,precio,cantidad}]`, `total`, `createdAt`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Reglas (demo/entrega)**
 
-### `npm run build`
+    rules_version = '2';
+    service cloud.firestore {
+      match /databases/{database}/documents {
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+        // Productos públicos (permitir solo actualizar stock)
+        match /Items/{id} {
+          allow read: if true;
+          allow update: if request.resource.data.diff(resource.data).changedKeys().hasOnly(['stock']);
+          allow create, delete: if false;
+        }
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+        // Crear órdenes
+        match /orders/{id} {
+          allow create: if true;
+          allow read, update, delete: if false;
+        }
+      }
+    }
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Flujo
+1. Catálogo y detalle desde Firestore.  
+2. `ItemCount` controla cantidad y stock; al agregar se oculta.  
+3. Carrito con Context (`CartProvider`), totales y acciones.  
+4. Checkout crea la orden en `orders` y muestra **ID**.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Notas
+- Imágenes servidas desde `/public/Img` usando `imagenUrl` (o URLs públicas).  
+- Enviar los **valores** de `.env.local` al docente para correr el proyecto.

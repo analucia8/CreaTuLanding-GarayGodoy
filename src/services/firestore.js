@@ -11,7 +11,7 @@ import {
   } from "firebase/firestore";
   import { db } from "../firebase/config";
   
-  const COL = "Items"; // nombre EXACTO de la colección
+  const COL = "Items"; 
   
   export async function fetchAllProducts() {
     const colRef = collection(db, COL);
@@ -27,7 +27,6 @@ import {
     return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
   }
   
-  // 👇 nombre consistente con tu ItemDetailContainer (fetchProductById)
   export async function fetchProductById(id) {
     const ref = doc(db, COL, id);
     const snap = await getDoc(ref);
@@ -36,13 +35,12 @@ import {
     return { id: snap.id, ...snap.data() };
   }
   
-  // 👇 función para crear la orden y descontar stock (fuera de la anterior)
   export async function createOrderWithStockCheck({ buyer, items }) {
     // items: [{ productId, nombre, precio, cantidad }]
     const batch = writeBatch(db);
     let total = 0;
   
-    // Verificar stock y preparar updates
+    // Verificar stock y updates
     for (const it of items) {
       total += it.precio * it.cantidad;
   

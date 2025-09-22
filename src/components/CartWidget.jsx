@@ -3,13 +3,13 @@ import { FaShoppingCart } from "react-icons/fa";
 import { useCart } from "../context/CartContext";
 
 export default function CartWidget() {
-  const { totalQty } = useCart(); // ← total de unidades en el carrito
+  const { totalQty } = useCart(); // total de unidades en el carrito
 
   return (
     <Link
       to="/cart"
       style={{
-        marginLeft: "auto",                // se va a la derecha si el contenedor padre es display:flex
+        marginLeft: "auto",                
         display: "inline-flex",
         alignItems: "center",
         gap: 8,
